@@ -1,7 +1,9 @@
-$global-color:red;
+$menu-color:#2a5caa;
 
 
-html,body{
-    margin:0;
-    padding:0;
-}
+
+
+
+:export{
+    menuColor:$menu-color;
+};
