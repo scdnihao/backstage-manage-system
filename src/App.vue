@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <Home></Home>
+    <Layout></Layout>  
   </div>
 </template>
 
 <script>
-import Home from './view/home/home'
+import Layout from './layout'
 
 export default {
   name: 'App',
   components: {
-    Home
+    Layout
   }
 }
 </script>
-<style lang="scss" scoped>
-@import "./style/globalstyle";
+<style lang="scss">
+@import "./style/main";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -23,6 +23,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
