@@ -69,11 +69,11 @@ export default {
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
-      }
+      },
     }
 }
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 @import "../style/globalstyle.scss";
 
 
