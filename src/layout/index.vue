@@ -63,11 +63,11 @@ export default {
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
-      }
+      },
     }
 }
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 
 .el-menu-vertical-demo{
     height:calc(100vh);
