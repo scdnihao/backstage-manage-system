@@ -1,6 +1,6 @@
 <template>
     <div class="appmain">
-            122332423455
+            
     </div>
 </template>
 <script>

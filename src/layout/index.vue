@@ -33,17 +33,20 @@
         <div class="rightbox"
         ref="marginNum">
                 <div class="banner">
-                    <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;"> -->
                         <div class="menu-status-button">
                             <i class="el-icon-s-fold menu-button" v-show="!isCollapse" @click="menuShow"></i>
                             <i class="el-icon-s-unfold  menu-button" v-show="isCollapse" @click="menuHide"></i>
                         </div>
-                        
-                        <!-- <el-radio-button :label="false" icon=""></el-radio-button>
-                        <el-radio-button :label="true" icon=""></el-radio-button> -->
-                    <!-- </el-radio-group> -->
                 </div>
-                <div class="visitpath"></div>
+                <div class="visitpath">
+                    <div class="pathinfo">
+                        <span><router-link to="/">主页</router-link></span>
+                        <div v-if="pathRouter.path" style="display:inline-block">
+                            <span>&nbsp;/&nbsp;</span>
+                            <span><router-link :to="pathRouter.path">{{pathRouter.name}}</router-link></span>
+                        </div>
+                    </div>
+                </div>
                 <Appmain />
         </div>
     </div>    
@@ -53,6 +56,7 @@
 <script>
 import globalstyle from "../style/globalstyle.scss";
 import Appmain from "./AppMain";
+// import router from "../router";
 
 export default {
     name:"Layout",
@@ -63,6 +67,11 @@ export default {
       return {
         isCollapse: true,
         marginNum:200,
+        pathRouter:{
+            path:"",
+            name:"第一页"
+        }
+
       };
     },
     computed:{
@@ -124,6 +133,7 @@ export default {
             transition: margin .4s;
             height:100%;
             margin-left:70px;
+            margin-right:5px;
             .banner{
                 position: relative;
                 height:50px;
@@ -133,7 +143,7 @@ export default {
                     left:20px;
                     display: inline-block;
                     font-size:30px;
-                    color:#e6e6e6;
+                    color:$menu-status-color;
                     line-height:50px;
                     .menu-button{
                         cursor: pointer;
@@ -141,7 +151,20 @@ export default {
                 }
             }
             .visitpath{
-                height:15px;
+                height:25px;
+                text-align: left;
+                padding-left:20px;
+                .pathinfo{
+                    display: inline-block;
+                    line-height:25px;
+                    span{
+                        color:#97a8be;
+                        font-weight: 400 !important;
+                        font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+                        font-size:15px;
+                    }
+                }
+                
             }
         }
     }
