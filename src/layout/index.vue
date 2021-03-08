@@ -30,12 +30,18 @@
                     </el-menu-item>
                 </el-menu>
         </div>
-        <div class="rightbox">
+        <div class="rightbox"
+        ref="marginNum">
                 <div class="banner">
-                    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-                        <el-radio-button :label="false">展开</el-radio-button>
-                        <el-radio-button :label="true">收起</el-radio-button>
-                    </el-radio-group>
+                    <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;"> -->
+                        <div class="menu-status-button">
+                            <i class="el-icon-s-fold menu-button" v-show="!isCollapse" @click="menuShow"></i>
+                            <i class="el-icon-s-unfold  menu-button" v-show="isCollapse" @click="menuHide"></i>
+                        </div>
+                        
+                        <!-- <el-radio-button :label="false" icon=""></el-radio-button>
+                        <el-radio-button :label="true" icon=""></el-radio-button> -->
+                    <!-- </el-radio-group> -->
                 </div>
                 <div class="visitpath"></div>
                 <Appmain />
@@ -55,7 +61,8 @@ export default {
     },
     data() {
       return {
-        isCollapse: false,
+        isCollapse: true,
+        marginNum:200,
       };
     },
     computed:{
@@ -64,12 +71,28 @@ export default {
         }
     },
     methods: {
-      handleOpen(key, keyPath) {
+        menuHide(){
+            this.isCollapse=false;
+        },
+        menuShow(){
+            this.isCollapse=true
+        },
+        handleOpen(key, keyPath) {
         console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
+        },
+        handleClose(key, keyPath) {
         console.log(key, keyPath);
-      },
+        },
+    },
+    watch:{
+        isCollapse(){
+            if(this.isCollapse){
+                    this.$refs.marginNum.style.marginLeft=70+"px"
+            }
+            if(!this.isCollapse){
+                this.$refs.marginNum.style.marginLeft=205+"px"
+            }
+        },
     }
 }
 </script>
@@ -86,24 +109,36 @@ export default {
     
     // min-width:1200px;
     .oderbox{
-        height:100%;
+        height:0;
         width:100%;
         position: relative;
         .leftbox{
             position: absolute;
             left:0;
             top:0;
-            height:100%;
             .el-menu-vertical-demo{
                 min-height:calc(100vh)
             }
         }
         .rightbox{
+            transition: margin .4s;
             height:100%;
-            margin-left:200px;
+            margin-left:70px;
             .banner{
+                position: relative;
                 height:50px;
                 background-color:$banner-color;
+                .menu-status-button{
+                    position: absolute;
+                    left:20px;
+                    display: inline-block;
+                    font-size:30px;
+                    color:#e6e6e6;
+                    line-height:50px;
+                    .menu-button{
+                        cursor: pointer;
+                    }
+                }
             }
             .visitpath{
                 height:15px;
