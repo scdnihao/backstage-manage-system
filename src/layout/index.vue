@@ -37,9 +37,7 @@
                             <i class="el-icon-s-fold menu-button" v-show="!isCollapse" @click="menuShow"></i>
                             <i class="el-icon-s-unfold  menu-button" v-show="isCollapse" @click="menuHide"></i>
                         </div>
-                </div>
-                <div class="visitpath">
-                    <div class="pathinfo">
+                        <div class="pathinfo">
                         <span><router-link to="/">主页</router-link></span>
                         <div v-if="pathRouter.path" style="display:inline-block">
                             <span>&nbsp;/&nbsp;</span>
@@ -149,23 +147,20 @@ export default {
                         cursor: pointer;
                     }
                 }
-            }
-            .visitpath{
-                height:25px;
-                text-align: left;
-                padding-left:20px;
                 .pathinfo{
+                    position: absolute;
+                    left:80px;
                     display: inline-block;
-                    line-height:25px;
+                    line-height:50px;
                     span{
-                        color:#97a8be;
+                        color:$menu-status-color;
                         font-weight: 400 !important;
                         font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
                         font-size:15px;
                     }
                 }
-                
             }
+            
         }
     }
 }
