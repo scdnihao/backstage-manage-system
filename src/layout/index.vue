@@ -120,7 +120,7 @@ export default {
         width:100%;
         position: relative;
         .leftbox{
-            position: absolute;
+            position: fixed;
             left:0;
             top:0;
             .el-menu-vertical-demo{
