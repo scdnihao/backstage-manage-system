@@ -3,7 +3,7 @@
         <div class="titlebanner">
             <span class="title">用户管理</span>
         </div>
-        <el-button class="adduser" type="primary" icon="el-icon-plus" size=small>新增用户</el-button>
+        <el-button class="adduser" type="primary" icon="el-icon-plus" size=small @click="dialogFormVisible=true">新增用户</el-button>
         <template>
                 <el-table
                     :data="tableData"
@@ -43,8 +43,8 @@
                     </el-table-column>
                     <el-table-column
                     label="操作">
-                        <template slot-scope="scope">
-                            <el-button class="userdelect" @click="dianji(scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
+                        <template slot-scope="">
+                            <el-button class="userdelect" @click="dianji()" type="primary" icon="el-icon-edit" circle></el-button>
                             <el-button class="useredit" type="danger" icon="el-icon-delete" circle></el-button>
                         </template>
                     </el-table-column>
@@ -53,18 +53,17 @@
 
         <!-- Form -->
         <template>
-            <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
-            <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+            <el-dialog title="收货地址" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
             <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="120">
-                <el-input v-model="form.name" autocomplete="off"></el-input>
+                <el-form-item label="活动名称" :label-width="formLabelWidth" style="display:inline-block;">
+                    <el-input v-model="form.name" autocomplete="off" ></el-input>
                 </el-form-item>
-                <el-form-item label="活动区域" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
+                <el-form-item label="活动区域" :label-width="formLabelWidth" style="display:inline-block;">
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                        <el-option :v-for="(item) in cityData[0]" label="区域一" value="shanghai"></el-option>
+                        <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -76,6 +75,7 @@
     </div>
 </template>
 <script>
+import cityData from "../../static/cityData.json"
 export default {
     name:"User",
     data(){
@@ -97,7 +97,7 @@ export default {
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }],
-            dialogTableVisible: false,
+            cityData:{},
             dialogFormVisible: false,
             form:{
 
@@ -106,8 +106,9 @@ export default {
         }
     },
     methods:{
-        dianji(index){
-                console.log(index);
+        dianji(){
+            this.cityData=cityData;
+            console.log(this.cityData);
         }
     }
 }

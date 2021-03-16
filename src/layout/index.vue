@@ -54,6 +54,7 @@
 <script>
 import globalstyle from "../style/globalstyle.scss";
 import Appmain from "./AppMain";
+// require('cityData.json');//加载本地数据文件
 // import router from "../router";
 
 export default {
