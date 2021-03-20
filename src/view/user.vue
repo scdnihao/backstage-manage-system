@@ -2,6 +2,35 @@
     <div class="user">
         <div class="titlebanner">
             <span class="title">用户管理</span>
+            <div class="selectstate">
+                <i class="el-icon-arrow-down"></i>
+                <i class="el-icon-arrow-up"></i>
+            </div>
+            
+        </div>
+        <!-- 查询表单 -->
+        <div class="userselect">
+                <el-form :inline="true" :model="formInline" class="demo-form-inline">
+                        <el-form-item label="用户名" size="mini">
+                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                        </el-form-item>
+                        <el-form-item label="所在部门" size="mini">
+                            <el-select v-model="formInline.region" placeholder="活动区域">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="邮箱" size="mini">
+                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电话" size="mini">
+                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" size="mini" >查询</el-button>
+                            <el-button type="primary" size="mini" >重置</el-button>
+                        </el-form-item>
+                </el-form>
         </div>
         <el-button class="adduser" type="primary" icon="el-icon-plus" size=small @click="dialogFormVisible=true">新增用户</el-button>
         <template>
@@ -61,7 +90,7 @@
                 </el-form-item>
                 <el-form-item label="活动区域" :label-width="formLabelWidth" style="display:inline-block;">
                     <el-select v-model="form.region" placeholder="请选择活动区域">
-                        <el-option :v-for="(item) in cityData[0]" label="区域一" value="shanghai"></el-option>
+                        <el-option  label="区域一" value="shanghai"></el-option>
                         <el-option label="区域二" value="beijing"></el-option>
                     </el-select>
                 </el-form-item>
@@ -75,11 +104,15 @@
     </div>
 </template>
 <script>
-import cityData from "../../static/cityData.json"
+// import cityData from "../../static/cityData.json"
 export default {
     name:"User",
     data(){
         return{
+            formInline: {
+                user: '',
+                region: ''
+             },
             tableData: [{
                 date: '2016-05-02',
                 name: '王小虎',
@@ -107,8 +140,8 @@ export default {
     },
     methods:{
         dianji(){
-            this.cityData=cityData;
-            console.log(this.cityData);
+            // this.cityData=cityData;
+            // console.log(this.cityData);
         }
     }
 }
@@ -118,6 +151,7 @@ export default {
         .user{
             text-align: left;
             .titlebanner{
+                position: relative;
                 height:40px;
                 background: -webkit-linear-gradient(to bottom,#DCDCDC,#ffffff);
                 background: -moz-linear-gradient(to bottom,#DCDCDC,#ffffff);
@@ -132,9 +166,35 @@ export default {
                     margin-left:20px;
                     line-height:40px;
                 }
+                .selectstate{
+                    position: absolute;
+                    vertical-align:middle;
+                    right:20px;
+                    display: inline-block;
+                    i{
+                        font-size: 18px;
+                    }
+                }
             }
             .adduser{
                 margin:20px 0 20px 10px;
+            }
+            .userselect{
+                padding:15px 15px;
+                border-radius:5px;
+                background: -webkit-linear-gradient(to bottom,#DCDCDC,#ffffff);
+                background: -moz-linear-gradient(to bottom,#DCDCDC,#ffffff);
+                background: -o-linear-gradient(to bottom,#DCDCDC,#ffffff);
+                background: -ms-linear-gradient(to bottom,#DCDCDC,#ffffff);
+                background: linear-gradient(to bottom,#DCDCDC,#ffffff);
+                box-shadow: 2px 3px 5px #999d9c;
+                border:1px solid #999d9c;
+                .el-form-item{
+                    margin:0;
+                    padding:0 10px;
+                    vertical-align: middle
+                    
+                }
             }
         }
 </style>
