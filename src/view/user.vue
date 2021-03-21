@@ -3,35 +3,37 @@
         <div class="titlebanner">
             <span class="title">用户管理</span>
             <div class="selectstate">
-                <i class="el-icon-arrow-down"></i>
-                <i class="el-icon-arrow-up"></i>
+                <i class="el-icon-arrow-down" v-show="arrowShow" @click="arrowShow=false"></i>
+                <i class="el-icon-arrow-up" v-show="!arrowShow" @click="arrowShow=true"></i>
             </div>
             
         </div>
         <!-- 查询表单 -->
-        <div class="userselect">
-                <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                        <el-form-item label="用户名" size="mini">
-                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-                        </el-form-item>
-                        <el-form-item label="所在部门" size="mini">
-                            <el-select v-model="formInline.region" placeholder="活动区域">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="邮箱" size="mini">
-                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-                        </el-form-item>
-                        <el-form-item label="电话" size="mini">
-                            <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" size="mini" >查询</el-button>
-                            <el-button type="primary" size="mini" >重置</el-button>
-                        </el-form-item>
-                </el-form>
-        </div>
+        <el-collapse-transition>
+            <div class="userselect" v-show="!arrowShow">
+                    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+                            <el-form-item label="用户名" size="mini">
+                                <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                            </el-form-item>
+                            <el-form-item label="所在部门" size="mini">
+                                <el-select v-model="formInline.region" placeholder="活动区域">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="邮箱" size="mini">
+                                <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                            </el-form-item>
+                            <el-form-item label="电话" size="mini">
+                                <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" size="mini" >查询</el-button>
+                                <el-button type="primary" size="mini" >重置</el-button>
+                            </el-form-item>
+                    </el-form>
+            </div>
+        </el-collapse-transition>
         <el-button class="adduser" type="primary" icon="el-icon-plus" size=small @click="dialogFormVisible=true">新增用户</el-button>
         <el-button class="useredit" type="danger" icon="el-icon-delete" size=small @click="delectUser()">删除</el-button>
         <template>
@@ -87,7 +89,6 @@
 
         <!-- Form -->
         <template>
-
             <el-dialog title="收货地址" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
             <el-form :model="form">
                 <el-form-item label="活动名称" :label-width="formLabelWidth" style="display:inline-block;">
@@ -141,20 +142,20 @@ export default {
 
             },
             formLabelWidth: '120px',
-            multipleSelection:[]                //选中列表
+            multipleSelection:[],                //选中列表
+            arrowShow:true                       //查询框显示隐藏
         }
     },
     methods:{
         async delectUser(){
-            console.log(this.multipleSelection)
             // if (rows) {
             //     rows.forEach(row => {
             //         this.$refs.multipleTable.toggleRowSelection(row);
             //     });
             //     }
-            // if(this.multipleSelection){
-            //     console.log(this.multipleSelection);
-            // };
+            if(this.multipleSelection.length!=0){
+                console.log(this.multipleSelection);
+            }
         },
         handleSelectionChange(val){
             this.multipleSelection = val;
@@ -191,11 +192,11 @@ export default {
                 }
                 .selectstate{
                     position: absolute;
-                    vertical-align:middle;
+                    top:8px;
                     right:20px;
                     display: inline-block;
                     i{
-                        font-size: 18px;
+                        font-size: 25px;
                     }
                 }
             }
@@ -203,7 +204,6 @@ export default {
                 margin:20px 0 20px 10px;
             }
             .userselect{
-                padding:15px 15px;
                 border-radius:5px;
                 background: -webkit-linear-gradient(to bottom,#DCDCDC,#ffffff);
                 background: -moz-linear-gradient(to bottom,#DCDCDC,#ffffff);
