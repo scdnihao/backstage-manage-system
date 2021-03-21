@@ -33,11 +33,17 @@
                 </el-form>
         </div>
         <el-button class="adduser" type="primary" icon="el-icon-plus" size=small @click="dialogFormVisible=true">新增用户</el-button>
+        <el-button class="useredit" type="danger" icon="el-icon-delete" size=small @click="delectUser()">删除</el-button>
         <template>
                 <el-table
                     :data="tableData"
                     border
-                    style="width:100%;">
+                    style="width:100%;"
+                    @selection-change="handleSelectionChange">
+                    <el-table-column
+                    type="selection"
+                    width="50">
+                    </el-table-column>
                     <el-table-column
                     prop="date"
                     label="用户名"
@@ -74,7 +80,6 @@
                     label="操作">
                         <template slot-scope="">
                             <el-button class="userdelect" @click="dianji()" type="primary" icon="el-icon-edit" circle></el-button>
-                            <el-button class="useredit" type="danger" icon="el-icon-delete" circle></el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -135,10 +140,25 @@ export default {
             form:{
 
             },
-            formLabelWidth: '120px'
+            formLabelWidth: '120px',
+            multipleSelection:[]                //选中列表
         }
     },
     methods:{
+        async delectUser(){
+            console.log(this.multipleSelection)
+            // if (rows) {
+            //     rows.forEach(row => {
+            //         this.$refs.multipleTable.toggleRowSelection(row);
+            //     });
+            //     }
+            // if(this.multipleSelection){
+            //     console.log(this.multipleSelection);
+            // };
+        },
+        handleSelectionChange(val){
+            this.multipleSelection = val;
+        },
         dianji(){
             // this.cityData=cityData;
             // console.log(this.cityData);
@@ -149,6 +169,9 @@ export default {
 <style lang="scss" scoped>
 @import "../style/globalstyle";
         .user{
+            .cell{
+                text-align:center;
+            }
             text-align: left;
             .titlebanner{
                 position: relative;

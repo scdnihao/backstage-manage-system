@@ -129,6 +129,7 @@ export default {
             }
         }
         .rightbox{
+            min-width:1200px;
             transition: margin .4s;
             height:100%;
             margin-left:70px;
