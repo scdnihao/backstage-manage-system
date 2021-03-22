@@ -17,7 +17,7 @@ export default {
     name:"Login",
     data(){
         return{
-                changeColor:"0"
+                changeColor:"0"             //tab切换样式变换
         }
     },
     methods:{
