@@ -10,10 +10,21 @@
             </div>
             <div class="tableinfo">
                 <ul>
+                    <!-- 账号密码登陆 -->
                     <li title="1" v-show="changeColor == '1'">
-                        <template>
                             <el-form v-model="loginForm">
-                                <el-form-item label="用户名" prop="userName" >
+                                <el-form-item label="用户名" prop="userName" class="whitecolor">
+                                    <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码" prop="passWord" class="whitecolor">
+                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
+                                </el-form-item>
+                            </el-form>
+                            <el-button style="width:300px;">登录</el-button>
+                    </li>
+                    <li title="2" v-show="changeColor == '2'">
+                            <el-form v-model="loginForm">
+                                <el-form-item label="手机号码" prop="userName" >
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
                                 <el-form-item label="密码" prop="passWord">
@@ -21,9 +32,7 @@
                                 </el-form-item>
                             </el-form>
                             <el-button style="width:300px;">登录</el-button>
-                        </template>
                     </li>
-                    <li title="2" v-show="changeColor == '2'">手机登录</li>
                     <li title="3" v-show="changeColor == '3'">用户注册</li>
                 </ul>
             </div>
@@ -66,7 +75,10 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
+        .whitecolor .el-form-item__label{
+                color:#DCDFE6 !important;
+        }
         .login{
             .tabSelected{
                 color:#409EFF !important;
@@ -99,6 +111,9 @@ export default {
                              &:hover{
                                  color:#409EFF;
                              }
+                            .el-form-item .el-form-item__label{
+                                    color:#DCDFE6 !important;
+                            }
                         }
                     }
                 }
