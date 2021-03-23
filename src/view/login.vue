@@ -12,7 +12,7 @@
                 <ul>
                     <!-- 账号密码登陆 -->
                     <li title="1" v-show="changeColor == '1'">
-                            <el-form v-model="loginForm">
+                            <el-form v-model="loginForm" class="userlogin">
                                 <el-form-item label="用户名" prop="userName" class="whitecolor">
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
@@ -20,20 +20,37 @@
                                     <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:300px;">登录</el-button>
+                            <el-button style="width:400px; margin-top:20px;">登录</el-button>
                     </li>
                     <li title="2" v-show="changeColor == '2'">
-                            <el-form v-model="loginForm">
-                                <el-form-item label="手机号码" prop="userName" >
+                            <el-form v-model="loginForm" class="phonelogin">
+                                <el-form-item label="手机号码" prop="userName"  class="whitecolor">
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
-                                <el-form-item label="密码" prop="passWord">
-                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
+                                <el-form-item label="验证码" prop="passWord" class="pincode">
+                                        <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
+                                            <el-button slot="append">获取验证码</el-button>
+                                        </el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:300px;">登录</el-button>
+                            <el-button style="width:400px; margin-top:20px;" >登录</el-button>
                     </li>
-                    <li title="3" v-show="changeColor == '3'">用户注册</li>
+                    <li title="3" v-show="changeColor == '3'">
+                            <el-form v-model="loginForm" class="register">
+                                <el-form-item label="用户名" prop="userName" class="whitecolor">
+                                    <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码" prop="passWord" class="whitecolor">
+                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
+                                </el-form-item>
+                                <el-form-item label="验证码" prop="passWord" class="pincode">
+                                        <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
+                                            <el-button slot="append">获取验证码</el-button>
+                                        </el-input>
+                                </el-form-item>
+                            </el-form>
+                            <el-button style="width:400px; margin-top:20px;" >登录</el-button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -44,7 +61,7 @@ export default {
     name:"Login",
     data(){
         return{
-                changeColor:"1",             //tab切换样式变换
+                changeColor:"3",             //tab切换样式变换
                 loginForm:{
                     userName:"",
                     passWord:""
@@ -76,6 +93,23 @@ export default {
 }
 </script>
 <style lang="scss" >
+        .pincode{
+            width:400px;
+            .el-form-item__label{
+                color:#DCDFE6 !important;
+            }
+            .el-input{
+                    .el-input-group__append{
+                        border-radius:0;
+                        border:none;
+                        background-color:#FFF;
+                    }
+                    .el-input__inner{
+                        border:none;
+                    }
+            }
+            
+        }
         .whitecolor .el-form-item__label{
                 color:#DCDFE6 !important;
         }
@@ -92,7 +126,7 @@ export default {
             .logininfo{
                 border:1px solid #C0C4CC;
                 border-radius:5px;
-                height:400px;
+                height:500px;
                 width:500px;
                 background-color:#181d4b;
                 .tabletitle{
@@ -111,14 +145,19 @@ export default {
                              &:hover{
                                  color:#409EFF;
                              }
-                            .el-form-item .el-form-item__label{
-                                    color:#DCDFE6 !important;
-                            }
+                            // .el-form-item .el-form-item__label{
+                            //         color:#DCDFE6 !important;
+                            // }
                         }
                     }
                 }
                 .tableinfo{
-                    height:340px;
+                    height:440px;
+                    ul{
+                        li{
+                            margin-top:20px;
+                        }
+                    }
 
                 }
             }
