@@ -45,7 +45,7 @@
                                 </el-form-item>
                                 <el-form-item label="验证码" prop="passWord" class="pincode">
                                         <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
-                                            <el-button slot="append">获取验证码</el-button>
+                                            <el-button slot="append">{{pinCodeIfon}}</el-button>
                                         </el-input>
                                 </el-form-item>
                             </el-form>
@@ -65,7 +65,8 @@ export default {
                 loginForm:{
                     userName:"",
                     passWord:""
-                }
+                },
+                pinCodeIfon:'获取验证码'
         }
     },
     methods:{
