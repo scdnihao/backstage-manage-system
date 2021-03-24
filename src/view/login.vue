@@ -29,7 +29,7 @@
                                 </el-form-item>
                                 <el-form-item label="验证码" prop="passWord" class="pincode">
                                         <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
-                                            <el-button slot="append">获取验证码</el-button>
+                                            <span slot="append" class="pincodetext" @click="getPinCode()" :class="readOnly ===true? 'span-onlyRead':''">{{pinCodeInfo}}</span>
                                         </el-input>
                                 </el-form-item>
                             </el-form>
@@ -45,11 +45,11 @@
                                 </el-form-item>
                                 <el-form-item label="验证码" prop="passWord" class="pincode">
                                         <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
-                                            <el-button slot="append">{{pinCodeIfon}}</el-button>
+                                            <span slot="append" class="pincodetext" @click="getPinCode()" :class="readOnly ===true? 'span-onlyRead':''">{{pinCodeInfo}}</span>
                                         </el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:400px; margin-top:20px;" >登录</el-button>
+                            <el-button style="width:400px; margin-top:20px;">登录</el-button>
                     </li>
                 </ul>
             </div>
@@ -66,7 +66,8 @@ export default {
                     userName:"",
                     passWord:""
                 },
-                pinCodeIfon:'获取验证码'
+                pinCodeInfo:'获取验证码',
+                readOnly:false
         }
     },
     methods:{
@@ -89,13 +90,34 @@ export default {
                 default:
                     break;
             }
+        },
+        getPinCode(){
+            this.readOnly=true
+            this.pinCodeInfo="60秒后重发"
+            let num =59
+            let timeOut=setInterval(() =>{
+                if(num==0){
+                    clearInterval(timeOut);
+                    this.readOnly=false
+                    this.pinCodeInfo="重新获取"
+                }else{
+                    this.pinCodeInfo=num--+"秒后重发"
+                }
+            },1000)
         }
     }
 }
 </script>
 <style lang="scss" >
+        .span-onlyRead{
+            pointer-events: none;
+        }
         .pincode{
             width:400px;
+            .pincodetext{
+                user-select: none;
+                cursor:pointer;
+            }
             .el-form-item__label{
                 color:#DCDFE6 !important;
             }
