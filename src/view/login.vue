@@ -17,11 +17,12 @@
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
                                 <el-form-item label="密码" prop="passWord" class="whitecolor">
-                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
+                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码" show-password></el-input>
                                 </el-form-item>
                             </el-form>
                             <el-button style="width:400px; margin-top:20px;">登录</el-button>
                     </li>
+                    <!-- 手机号登录 -->
                     <li title="2" v-show="changeColor == '2'">
                             <el-form v-model="loginForm" class="phonelogin">
                                 <el-form-item label="手机号码" prop="userName"  class="whitecolor">
@@ -29,23 +30,24 @@
                                 </el-form-item>
                                 <el-form-item label="验证码" prop="passWord" class="pincode">
                                         <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
-                                            <span slot="append" class="pincodetext" @click="getPinCode()" :class="readOnly ===true? 'span-onlyRead':''">{{pinCodeInfo}}</span>
+                                            <span slot="append" class="pincodetext" @click="getPinCode(0)" :class="pinList[0].readOnly ===true? 'span-onlyRead':''">{{pinList[0].pinCodeInfo}}</span>
                                         </el-input>
                                 </el-form-item>
                             </el-form>
                             <el-button style="width:400px; margin-top:20px;" >登录</el-button>
                     </li>
+                    <!-- 注册 -->
                     <li title="3" v-show="changeColor == '3'">
                             <el-form v-model="loginForm" class="register">
                                 <el-form-item label="用户名" prop="userName" class="whitecolor">
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
                                 <el-form-item label="密码" prop="passWord" class="whitecolor">
-                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码"></el-input>
+                                    <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码" show-password></el-input>
                                 </el-form-item>
                                 <el-form-item label="验证码" prop="passWord" class="pincode">
                                         <el-input type="text" v-model="loginForm.passWord" placeholder="请输入验证码">
-                                            <span slot="append" class="pincodetext" @click="getPinCode()" :class="readOnly ===true? 'span-onlyRead':''">{{pinCodeInfo}}</span>
+                                            <span slot="append" class="pincodetext" @click="getPinCode(1)" :class="pinList[1].readOnly ===true? 'span-onlyRead':''">{{pinList[1].pinCodeInfo}}</span>
                                         </el-input>
                                 </el-form-item>
                             </el-form>
@@ -66,8 +68,13 @@ export default {
                     userName:"",
                     passWord:""
                 },
-                pinCodeInfo:'获取验证码',
-                readOnly:false
+                pinList:[
+                    {pinCodeInfo:'获取验证码',
+                    readOnly:false},
+                    {pinCodeInfo:'获取验证码',
+                    readOnly:false}
+                ],
+                
         }
     },
     methods:{
@@ -76,32 +83,30 @@ export default {
             // console.log(target.getAttribute("value"))
             switch(target.getAttribute("value")){
                 case "1":
-                    console.log(1);
                     this.changeColor="1";
                     break;
                 case "2":
-                    console.log(2);
                     this.changeColor="2";
                     break;
                 case "3":
-                    console.log(3);
                     this.changeColor="3";
                     break;
                 default:
                     break;
             }
         },
-        getPinCode(){
-            this.readOnly=true
-            this.pinCodeInfo="60秒后重发"
+        getPinCode(index){
+            console.log(index);
+            this.pinList[index].readOnly=true
+            this.pinList[index].pinCodeInfo="60秒后重发"
             let num =59
             let timeOut=setInterval(() =>{
                 if(num==0){
                     clearInterval(timeOut);
-                    this.readOnly=false
-                    this.pinCodeInfo="重新获取"
+                    this.pinList[index].readOnly=false
+                    this.pinList[index].pinCodeInfo="重新获取"
                 }else{
-                    this.pinCodeInfo=num--+"秒后重发"
+                    this.pinList[index].pinCodeInfo=num--+"秒后重发"
                 }
             },1000)
         }
