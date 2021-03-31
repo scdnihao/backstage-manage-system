@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../style/globalstyle";
+@import "@/style/globalstyle";
         .appmain{
             padding:10px 0;
             // .functiontitle{
