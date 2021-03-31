@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <Login/> 
+    <!-- <Login/>  -->
+    <Layout/>
   </div>
 </template>
 
 <script>
-import Layout from './layout'
-import Login from './view/login'
+import Layout from '@/layout'
+import Login from '@/view/login'
 
 export default {
   name: 'App',
@@ -17,7 +18,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "./style/main.scss";
+@import "@/style/main.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

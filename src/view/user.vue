@@ -168,7 +168,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../style/globalstyle";
+@import "@/style/globalstyle";
         .user{
             .cell{
                 text-align:center;

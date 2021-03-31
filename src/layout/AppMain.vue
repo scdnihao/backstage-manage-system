@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import User from "../view/user"
+import User from "@/view/user"
 export default {
 
     name:"Appmain",
