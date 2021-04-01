@@ -12,7 +12,7 @@
                 <ul>
                     <!-- 账号密码登陆 -->
                     <li v-show="changeColor == '1'">
-                            <el-form :model='loginForm'  class="userlogin" :rules='rules'>
+                            <el-form :model='loginForm' ref="login"  class="userlogin" :rules='rules'>
                                 <el-form-item label="用户名" prop="userName">
                                     <el-input v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
                                 </el-form-item>
@@ -20,11 +20,11 @@
                                     <el-input type="password" v-model="loginForm.passWord" placeholder="请输入密码" show-password></el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:400px; margin-top:20px;">登录</el-button>
+                            <el-button style="width:200px; margin-top:20px;" @click="login(1)">登录</el-button>
                     </li>
                     <!-- 手机号登录 -->
                     <li v-show="changeColor == '2'">
-                            <el-form :model='phoneLoginForm' class="phonelogin" :rules="rules">
+                            <el-form :model='phoneLoginForm' ref="loginData" class="phonelogin" :rules="rules">
                                 <el-form-item label="手机号码" prop="phoneNumber">
                                     <el-input v-model="phoneLoginForm.phoneNumber" placeholder="请输入手机号码"></el-input>
                                 </el-form-item>
@@ -34,7 +34,7 @@
                                         </el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:400px; margin-top:20px;">登录</el-button>
+                            <el-button style="width:200px; margin-top:20px;" @click="login(2)">登录</el-button>
                     </li>
                     <!-- 注册 -->
                     <li v-show="changeColor == '3'">
@@ -54,7 +54,7 @@
                                         </el-input>
                                 </el-form-item>
                             </el-form>
-                            <el-button style="width:400px; margin-top:20px;" @click="userRegister">注册</el-button>
+                            <el-button style="width:200px; margin-top:20px;" @click="userRegister">注册</el-button>
                     </li>
                 </ul>
             </div>
@@ -97,7 +97,7 @@ export default {
             }
         };
         var pinCode=(rules,value,callback)=>{
-            if(!/^[0-9]{6}/.test(value)){
+            if(!/^[0-9]{6}$/.test(value)){
                 callback(new Error('请输入6位数字验证码'))
             }else {
                 callback()
@@ -185,21 +185,27 @@ export default {
             this.$refs.register.validate((valid)=>{
                 if(valid){console.log(this.signForm)}
                 })
+        },
+        // 登陆
+        login(value){
+            if(value==1){
+                this.$refs.login.validate((valid)=>{
+                if(valid){console.log(valid)}
+                })
+            }else if(value==2){
+                this.$refs.loginData.validate((valid)=>{
+                if(valid){console.log(valid)}
+                })
+            }
+            
         }
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" >
         .span-onlyRead{
             pointer-events: none;
         }
-        .el-input__inner{
-            height:30px !important;
-        }
-        .el-form-item__label{
-                line-height:30px !important;
-                color:#DCDFE6 !important;
-            }
         .pincode{
             width:400px;
             .pincodetext{
@@ -229,6 +235,19 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            .el-form-item{
+            width:300px!important;
+            }
+            .el-input__inner{
+                height:30px !important;
+            }
+            .el-form-item__label{
+                    line-height:30px !important;
+                    color:#DCDFE6 !important;
+                }
+            .el-input{
+                width:300px!important;
+            }
             .logininfo{
                 border-radius:5px;
                 height:550px;
@@ -243,7 +262,7 @@ export default {
                             display: inline-block;
                             color:#DCDFE6;
                             cursor: default;
-                            font-size:20px;
+                            font-size:18px;
                             font-weight:800;
                             padding:0 20px;
                             user-select: none;
